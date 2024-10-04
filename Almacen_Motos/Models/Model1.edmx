@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="repuestos_motosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="garantia">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="periodo_garantia" Type="int" />
+          <Property Name="dia_garantia" Type="date" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="200" />
+          <Property Name="C_Servicio" Type="int" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="400" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="respuestos">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_repuesto" Type="nvarchar" MaxLength="100" />
+          <Property Name="categoria_repuesto" Type="nvarchar" MaxLength="100" />
+          <Property Name="marca" Type="nvarchar" MaxLength="200" />
+          <Property Name="cantidad_respuesto" Type="int" />
+          <Property Name="precios_respuesto" Type="float" />
+          <Property Name="ID_proveedor" Type="int" />
+          <Property Name="C_Garantia" Type="int" />
+        </EntityType>
+        <EntityType Name="servicio_mecanica">
+          <Key>
+            <PropertyRef Name="Codigo_servicio" />
+          </Key>
+          <Property Name="Codigo_servicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="150" />
+          <Property Name="precio" Type="float" />
+          <Property Name="codigo_repuesto" Type="int" />
+          <Property Name="C_Garantia" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__respuesto__C_Gar__09A971A2">
+          <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
+          <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="garantia">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="respuestos">
+              <PropertyRef Name="C_Garantia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__respuesto__ID_pr__0A9D95DB">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="respuestos">
+              <PropertyRef Name="ID_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio___C_Gar__0D7A0286">
+          <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
+          <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="garantia">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="servicio_mecanica">
+              <PropertyRef Name="C_Garantia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio___codig__0E6E26BF">
+          <End Role="respuestos" Type="Self.respuestos" Multiplicity="0..1" />
+          <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="respuestos">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="servicio_mecanica">
+              <PropertyRef Name="codigo_repuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="repuestos_motosModelStoreContainer">
+          <EntitySet Name="garantia" EntityType="Self.garantia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="respuestos" EntityType="Self.respuestos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="servicio_mecanica" EntityType="Self.servicio_mecanica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__respuesto__C_Gar__09A971A2" Association="Self.FK__respuesto__C_Gar__09A971A2">
+            <End Role="garantia" EntitySet="garantia" />
+            <End Role="respuestos" EntitySet="respuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__respuesto__ID_pr__0A9D95DB" Association="Self.FK__respuesto__ID_pr__0A9D95DB">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="respuestos" EntitySet="respuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio___C_Gar__0D7A0286" Association="Self.FK__servicio___C_Gar__0D7A0286">
+            <End Role="garantia" EntitySet="garantia" />
+            <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio___codig__0E6E26BF" Association="Self.FK__servicio___codig__0E6E26BF">
+            <End Role="respuestos" EntitySet="respuestos" />
+            <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="repuestos_motosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="garantia">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="periodo_garantia" Type="Int32" />
+          <Property Name="dia_garantia" Type="DateTime" Precision="0" />
+          <Property Name="tipo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="C_Servicio" Type="Int32" />
+          <NavigationProperty Name="respuestos" Relationship="Self.FK__respuesto__C_Gar__09A971A2" FromRole="garantia" ToRole="respuestos" />
+          <NavigationProperty Name="servicio_mecanica" Relationship="Self.FK__servicio___C_Gar__0D7A0286" FromRole="garantia" ToRole="servicio_mecanica" />
+        </EntityType>
+        <EntityType Name="proveedor">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="respuestos" Relationship="Self.FK__respuesto__ID_pr__0A9D95DB" FromRole="proveedor" ToRole="respuestos" />
+        </EntityType>
+        <EntityType Name="respuestos">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_repuesto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="categoria_repuesto" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="marca" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="cantidad_respuesto" Type="Int32" />
+          <Property Name="precios_respuesto" Type="Double" />
+          <Property Name="ID_proveedor" Type="Int32" />
+          <Property Name="C_Garantia" Type="Int32" />
+          <NavigationProperty Name="garantia" Relationship="Self.FK__respuesto__C_Gar__09A971A2" FromRole="respuestos" ToRole="garantia" />
+          <NavigationProperty Name="proveedor" Relationship="Self.FK__respuesto__ID_pr__0A9D95DB" FromRole="respuestos" ToRole="proveedor" />
+          <NavigationProperty Name="servicio_mecanica" Relationship="Self.FK__servicio___codig__0E6E26BF" FromRole="respuestos" ToRole="servicio_mecanica" />
+        </EntityType>
+        <EntityType Name="servicio_mecanica">
+          <Key>
+            <PropertyRef Name="Codigo_servicio" />
+          </Key>
+          <Property Name="Codigo_servicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="precio" Type="Double" />
+          <Property Name="codigo_repuesto" Type="Int32" />
+          <Property Name="C_Garantia" Type="Int32" />
+          <NavigationProperty Name="garantia" Relationship="Self.FK__servicio___C_Gar__0D7A0286" FromRole="servicio_mecanica" ToRole="garantia" />
+          <NavigationProperty Name="respuestos" Relationship="Self.FK__servicio___codig__0E6E26BF" FromRole="servicio_mecanica" ToRole="respuestos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__respuesto__C_Gar__09A971A2">
+          <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
+          <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="garantia">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="respuestos">
+              <PropertyRef Name="C_Garantia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio___C_Gar__0D7A0286">
+          <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
+          <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="garantia">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="servicio_mecanica">
+              <PropertyRef Name="C_Garantia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__respuesto__ID_pr__0A9D95DB">
+          <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
+          <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="proveedor">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="respuestos">
+              <PropertyRef Name="ID_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__servicio___codig__0E6E26BF">
+          <End Role="respuestos" Type="Self.respuestos" Multiplicity="0..1" />
+          <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="respuestos">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="servicio_mecanica">
+              <PropertyRef Name="codigo_repuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="repuestos_motosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="garantia" EntityType="Self.garantia" />
+          <EntitySet Name="proveedor" EntityType="Self.proveedor" />
+          <EntitySet Name="respuestos" EntityType="Self.respuestos" />
+          <EntitySet Name="servicio_mecanica" EntityType="Self.servicio_mecanica" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__respuesto__C_Gar__09A971A2" Association="Self.FK__respuesto__C_Gar__09A971A2">
+            <End Role="garantia" EntitySet="garantia" />
+            <End Role="respuestos" EntitySet="respuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio___C_Gar__0D7A0286" Association="Self.FK__servicio___C_Gar__0D7A0286">
+            <End Role="garantia" EntitySet="garantia" />
+            <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__respuesto__ID_pr__0A9D95DB" Association="Self.FK__respuesto__ID_pr__0A9D95DB">
+            <End Role="proveedor" EntitySet="proveedor" />
+            <End Role="respuestos" EntitySet="respuestos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__servicio___codig__0E6E26BF" Association="Self.FK__servicio___codig__0E6E26BF">
+            <End Role="respuestos" EntitySet="respuestos" />
+            <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="repuestos_motosModelStoreContainer" CdmEntityContainer="repuestos_motosEntities">
+          <EntitySetMapping Name="garantia">
+            <EntityTypeMapping TypeName="repuestos_motosModel.garantia">
+              <MappingFragment StoreEntitySet="garantia">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="periodo_garantia" ColumnName="periodo_garantia" />
+                <ScalarProperty Name="dia_garantia" ColumnName="dia_garantia" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="C_Servicio" ColumnName="C_Servicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="proveedor">
+            <EntityTypeMapping TypeName="repuestos_motosModel.proveedor">
+              <MappingFragment StoreEntitySet="proveedor">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="respuestos">
+            <EntityTypeMapping TypeName="repuestos_motosModel.respuestos">
+              <MappingFragment StoreEntitySet="respuestos">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre_repuesto" ColumnName="Nombre_repuesto" />
+                <ScalarProperty Name="categoria_repuesto" ColumnName="categoria_repuesto" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="cantidad_respuesto" ColumnName="cantidad_respuesto" />
+                <ScalarProperty Name="precios_respuesto" ColumnName="precios_respuesto" />
+                <ScalarProperty Name="ID_proveedor" ColumnName="ID_proveedor" />
+                <ScalarProperty Name="C_Garantia" ColumnName="C_Garantia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="servicio_mecanica">
+            <EntityTypeMapping TypeName="repuestos_motosModel.servicio_mecanica">
+              <MappingFragment StoreEntitySet="servicio_mecanica">
+                <ScalarProperty Name="Codigo_servicio" ColumnName="Codigo_servicio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="precio" ColumnName="precio" />
+                <ScalarProperty Name="codigo_repuesto" ColumnName="codigo_repuesto" />
+                <ScalarProperty Name="C_Garantia" ColumnName="C_Garantia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="repuestos_motosModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
