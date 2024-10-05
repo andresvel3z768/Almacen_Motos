@@ -167,7 +167,11 @@
     <Compile Include="Clases\ClsRepuesto.cs" />
     <Compile Include="Clases\ClsServicio.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\RepuestoController.cs" />
+    <Compile Include="Controllers\ServicioController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\GarantiaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

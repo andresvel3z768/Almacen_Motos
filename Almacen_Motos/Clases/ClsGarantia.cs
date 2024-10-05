@@ -66,7 +66,7 @@ namespace Almacen_Motos.Clases
 
                 }
             }
-            catch (Exception ex) { return ex.Message; }
+            catch (Exception ex) { return "en caso de que no se elimine elimina las dependencias que la origina "+ ex.Message; }
         }
     }
 }
