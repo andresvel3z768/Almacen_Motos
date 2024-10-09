@@ -17,7 +17,7 @@ namespace Almacen_Motos.Clases
            return Garantia_.garantia.FirstOrDefault(CG=> CG.codigo== codigo_garantia);
         }
 
-        public string insertar(garantia Garantia)
+        public string insertar()
         {
             try
             {

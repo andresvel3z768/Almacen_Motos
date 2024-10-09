@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Almacen_Motos.Controllers
 {
+    [RoutePrefix("api/repuestos")]
     public class RepuestoController : ApiController
     {
         [HttpGet]

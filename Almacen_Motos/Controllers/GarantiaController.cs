@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Almacen_Motos.Clases;
+using Almacen_Motos.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,33 +9,40 @@ using System.Web.Http;
 
 namespace Almacen_Motos.Controllers
 {
+    [RoutePrefix("api/garantias")]
     public class GarantiaController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("consultar")]
+        public garantia ConsultarXcodigo(int codigo)
         {
-            return new string[] { "value1", "value2" };
+            ClsGarantia clsgarantia = new ClsGarantia();
+            return clsgarantia.consultar(codigo);
+        }
+        [HttpPost]
+        [Route("insetar")]
+        public string insertar([FromBody] garantia GARANTIA)
+        {
+            ClsGarantia _garantia = new ClsGarantia();
+            _garantia.Garantia = GARANTIA;
+            return _garantia.insertar();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpPut]
+        [Route("Actualizar")]
+        public string Actualizar([FromBody] garantia GARANTIA)
         {
-            return "value";
+            ClsGarantia _garantia = new ClsGarantia();
+            _garantia.Garantia = GARANTIA;
+            return _garantia.actualizar();
         }
-
-        // POST api/<controller>
-        public void Post([FromBody] string value)
+        [HttpDelete]
+        [Route("Eliminar")]
+        public string Eliminar([FromBody] garantia GARANTIA)
         {
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
+            ClsGarantia _garantia = new ClsGarantia();
+            _garantia.Garantia = GARANTIA;
+            return _garantia.Eliminar();
         }
     }
 }
