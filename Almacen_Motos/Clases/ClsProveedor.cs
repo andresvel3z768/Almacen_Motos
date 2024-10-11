@@ -15,7 +15,7 @@ namespace Almacen_Motos.Clases
 
         public proveedor consultar(int codigo) 
         {
-            return Repuestos_.proveedor.FirstOrDefault(P=>P.codigo == codigo);
+            return Repuestos_.proveedor.FirstOrDefault(P => P.codigo == codigo);
         }
 
         public string insertar() 

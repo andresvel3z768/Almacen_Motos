@@ -47,7 +47,6 @@
           <Property Name="descripcion" Type="nvarchar" MaxLength="150" />
           <Property Name="precio" Type="float" />
           <Property Name="codigo_repuesto" Type="int" />
-          <Property Name="C_Garantia" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -59,7 +58,7 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <Association Name="FK__respuesto__C_Gar__09A971A2">
+        <Association Name="FK__respuesto__C_Gar__339FAB6E">
           <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
           <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -71,7 +70,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__respuesto__ID_pr__0A9D95DB">
+        <Association Name="FK__respuesto__ID_pr__3493CFA7">
           <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
           <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -83,19 +82,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__servicio___C_Gar__0D7A0286">
-          <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
-          <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="garantia">
-              <PropertyRef Name="codigo" />
-            </Principal>
-            <Dependent Role="servicio_mecanica">
-              <PropertyRef Name="C_Garantia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__servicio___codig__0E6E26BF">
+        <Association Name="FK__servicio___codig__37703C52">
           <End Role="respuestos" Type="Self.respuestos" Multiplicity="0..1" />
           <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,19 +100,15 @@
           <EntitySet Name="respuestos" EntityType="Self.respuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="servicio_mecanica" EntityType="Self.servicio_mecanica" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__respuesto__C_Gar__09A971A2" Association="Self.FK__respuesto__C_Gar__09A971A2">
+          <AssociationSet Name="FK__respuesto__C_Gar__339FAB6E" Association="Self.FK__respuesto__C_Gar__339FAB6E">
             <End Role="garantia" EntitySet="garantia" />
             <End Role="respuestos" EntitySet="respuestos" />
           </AssociationSet>
-          <AssociationSet Name="FK__respuesto__ID_pr__0A9D95DB" Association="Self.FK__respuesto__ID_pr__0A9D95DB">
+          <AssociationSet Name="FK__respuesto__ID_pr__3493CFA7" Association="Self.FK__respuesto__ID_pr__3493CFA7">
             <End Role="proveedor" EntitySet="proveedor" />
             <End Role="respuestos" EntitySet="respuestos" />
           </AssociationSet>
-          <AssociationSet Name="FK__servicio___C_Gar__0D7A0286" Association="Self.FK__servicio___C_Gar__0D7A0286">
-            <End Role="garantia" EntitySet="garantia" />
-            <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
-          </AssociationSet>
-          <AssociationSet Name="FK__servicio___codig__0E6E26BF" Association="Self.FK__servicio___codig__0E6E26BF">
+          <AssociationSet Name="FK__servicio___codig__37703C52" Association="Self.FK__servicio___codig__37703C52">
             <End Role="respuestos" EntitySet="respuestos" />
             <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
           </AssociationSet>
@@ -144,8 +127,7 @@
           <Property Name="dia_garantia" Type="DateTime" Precision="0" />
           <Property Name="tipo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="C_Servicio" Type="Int32" />
-          <NavigationProperty Name="respuestos" Relationship="Self.FK__respuesto__C_Gar__09A971A2" FromRole="garantia" ToRole="respuestos" />
-          <NavigationProperty Name="servicio_mecanica" Relationship="Self.FK__servicio___C_Gar__0D7A0286" FromRole="garantia" ToRole="servicio_mecanica" />
+          <NavigationProperty Name="respuestos" Relationship="Self.FK__respuesto__C_Gar__339FAB6E" FromRole="garantia" ToRole="respuestos" />
         </EntityType>
         <EntityType Name="proveedor">
           <Key>
@@ -156,7 +138,7 @@
           <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="Telefono" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="respuestos" Relationship="Self.FK__respuesto__ID_pr__0A9D95DB" FromRole="proveedor" ToRole="respuestos" />
+          <NavigationProperty Name="respuestos" Relationship="Self.FK__respuesto__ID_pr__3493CFA7" FromRole="proveedor" ToRole="respuestos" />
         </EntityType>
         <EntityType Name="respuestos">
           <Key>
@@ -170,9 +152,9 @@
           <Property Name="precios_respuesto" Type="Double" />
           <Property Name="ID_proveedor" Type="Int32" />
           <Property Name="C_Garantia" Type="Int32" />
-          <NavigationProperty Name="garantia" Relationship="Self.FK__respuesto__C_Gar__09A971A2" FromRole="respuestos" ToRole="garantia" />
-          <NavigationProperty Name="proveedor" Relationship="Self.FK__respuesto__ID_pr__0A9D95DB" FromRole="respuestos" ToRole="proveedor" />
-          <NavigationProperty Name="servicio_mecanica" Relationship="Self.FK__servicio___codig__0E6E26BF" FromRole="respuestos" ToRole="servicio_mecanica" />
+          <NavigationProperty Name="garantia" Relationship="Self.FK__respuesto__C_Gar__339FAB6E" FromRole="respuestos" ToRole="garantia" />
+          <NavigationProperty Name="proveedor" Relationship="Self.FK__respuesto__ID_pr__3493CFA7" FromRole="respuestos" ToRole="proveedor" />
+          <NavigationProperty Name="servicio_mecanica" Relationship="Self.FK__servicio___codig__37703C52" FromRole="respuestos" ToRole="servicio_mecanica" />
         </EntityType>
         <EntityType Name="servicio_mecanica">
           <Key>
@@ -183,9 +165,7 @@
           <Property Name="descripcion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="precio" Type="Double" />
           <Property Name="codigo_repuesto" Type="Int32" />
-          <Property Name="C_Garantia" Type="Int32" />
-          <NavigationProperty Name="garantia" Relationship="Self.FK__servicio___C_Gar__0D7A0286" FromRole="servicio_mecanica" ToRole="garantia" />
-          <NavigationProperty Name="respuestos" Relationship="Self.FK__servicio___codig__0E6E26BF" FromRole="servicio_mecanica" ToRole="respuestos" />
+          <NavigationProperty Name="respuestos" Relationship="Self.FK__servicio___codig__37703C52" FromRole="servicio_mecanica" ToRole="respuestos" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -197,7 +177,7 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK__respuesto__C_Gar__09A971A2">
+        <Association Name="FK__respuesto__C_Gar__339FAB6E">
           <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
           <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -209,19 +189,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__servicio___C_Gar__0D7A0286">
-          <End Role="garantia" Type="Self.garantia" Multiplicity="0..1" />
-          <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="garantia">
-              <PropertyRef Name="codigo" />
-            </Principal>
-            <Dependent Role="servicio_mecanica">
-              <PropertyRef Name="C_Garantia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__respuesto__ID_pr__0A9D95DB">
+        <Association Name="FK__respuesto__ID_pr__3493CFA7">
           <End Role="proveedor" Type="Self.proveedor" Multiplicity="0..1" />
           <End Role="respuestos" Type="Self.respuestos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -233,7 +201,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__servicio___codig__0E6E26BF">
+        <Association Name="FK__servicio___codig__37703C52">
           <End Role="respuestos" Type="Self.respuestos" Multiplicity="0..1" />
           <End Role="servicio_mecanica" Type="Self.servicio_mecanica" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,19 +219,15 @@
           <EntitySet Name="respuestos" EntityType="Self.respuestos" />
           <EntitySet Name="servicio_mecanica" EntityType="Self.servicio_mecanica" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK__respuesto__C_Gar__09A971A2" Association="Self.FK__respuesto__C_Gar__09A971A2">
+          <AssociationSet Name="FK__respuesto__C_Gar__339FAB6E" Association="Self.FK__respuesto__C_Gar__339FAB6E">
             <End Role="garantia" EntitySet="garantia" />
             <End Role="respuestos" EntitySet="respuestos" />
           </AssociationSet>
-          <AssociationSet Name="FK__servicio___C_Gar__0D7A0286" Association="Self.FK__servicio___C_Gar__0D7A0286">
-            <End Role="garantia" EntitySet="garantia" />
-            <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
-          </AssociationSet>
-          <AssociationSet Name="FK__respuesto__ID_pr__0A9D95DB" Association="Self.FK__respuesto__ID_pr__0A9D95DB">
+          <AssociationSet Name="FK__respuesto__ID_pr__3493CFA7" Association="Self.FK__respuesto__ID_pr__3493CFA7">
             <End Role="proveedor" EntitySet="proveedor" />
             <End Role="respuestos" EntitySet="respuestos" />
           </AssociationSet>
-          <AssociationSet Name="FK__servicio___codig__0E6E26BF" Association="Self.FK__servicio___codig__0E6E26BF">
+          <AssociationSet Name="FK__servicio___codig__37703C52" Association="Self.FK__servicio___codig__37703C52">
             <End Role="respuestos" EntitySet="respuestos" />
             <End Role="servicio_mecanica" EntitySet="servicio_mecanica" />
           </AssociationSet>
@@ -318,7 +282,6 @@
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="codigo_repuesto" ColumnName="codigo_repuesto" />
-                <ScalarProperty Name="C_Garantia" ColumnName="C_Garantia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

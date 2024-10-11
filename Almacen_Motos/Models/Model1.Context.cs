@@ -9,7 +9,6 @@
 
 namespace Almacen_Motos.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -25,15 +24,11 @@ namespace Almacen_Motos.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-        [JsonIgnore]
+    
         public virtual DbSet<garantia> garantia { get; set; }
-        [JsonIgnore]
         public virtual DbSet<proveedor> proveedor { get; set; }
-        [JsonIgnore]
         public virtual DbSet<respuestos> respuestos { get; set; }
-        [JsonIgnore]
         public virtual DbSet<servicio_mecanica> servicio_mecanica { get; set; }
-        [JsonIgnore]
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

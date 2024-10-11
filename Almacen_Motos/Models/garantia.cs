@@ -9,6 +9,7 @@
 
 namespace Almacen_Motos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -18,7 +19,6 @@ namespace Almacen_Motos.Models
         public garantia()
         {
             this.respuestos = new HashSet<respuestos>();
-            this.servicio_mecanica = new HashSet<servicio_mecanica>();
         }
     
         public int codigo { get; set; }
@@ -28,8 +28,7 @@ namespace Almacen_Motos.Models
         public Nullable<int> C_Servicio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
         public virtual ICollection<respuestos> respuestos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<servicio_mecanica> servicio_mecanica { get; set; }
     }
 }

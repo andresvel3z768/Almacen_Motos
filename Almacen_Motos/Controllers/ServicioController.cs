@@ -17,6 +17,7 @@ namespace Almacen_Motos.Controllers
         public servicio_mecanica ConsultarXcodigo(int codigo)
         {
             ClsServicio clsservi = new ClsServicio();
+            servicio_mecanica _servicio = clsservi.consultar(codigo);
             return clsservi.consultar(codigo);
         }
         [HttpPost]

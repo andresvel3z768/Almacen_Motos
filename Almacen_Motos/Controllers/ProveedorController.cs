@@ -13,10 +13,11 @@ namespace Almacen_Motos.Controllers
     public class ProveedorController : ApiController
     {
         [HttpGet]
-        [Route("consultar")]
+        [Route("consultarXcodigo")]
         public proveedor ConsultarXcodigo(int Codigo) 
         {
             ClsProveedor clsProveedor = new ClsProveedor();
+            proveedor provedor = clsProveedor.consultar(Codigo);
             return clsProveedor.consultar(Codigo);
         }
         [HttpPost]

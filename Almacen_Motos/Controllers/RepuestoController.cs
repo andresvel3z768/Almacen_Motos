@@ -14,10 +14,10 @@ namespace Almacen_Motos.Controllers
     {
         [HttpGet]
         [Route("consultar")]
-        public respuestos ConsultarXcodigo(string Nombre)
+        public respuestos ConsultarXcodigo(int Codigo)
         {
             ClsRepuesto clsRepuesto = new ClsRepuesto();
-            return clsRepuesto.Consultar(Nombre);
+            return clsRepuesto.Consultar(Codigo);
         }
         [HttpPost]
         [Route("insetar")]

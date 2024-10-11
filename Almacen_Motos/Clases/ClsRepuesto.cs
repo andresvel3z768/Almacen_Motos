@@ -45,7 +45,7 @@ namespace Almacen_Motos.Clases
             try
             {
                 //Hay que consultar el cliente, como el método devuelve un objeto de tipo cliente, debo crear una instancia de la clase CLIEnte
-                respuestos _repuesto = Consultar(repuesto.Nombre_repuesto);
+                respuestos _repuesto = Consultar(repuesto.Codigo);
                 //Se valida si el cliente existe para eliminarlo
                 if (_repuesto == null)
                 {
@@ -65,12 +65,12 @@ namespace Almacen_Motos.Clases
                 return "Debes tener problema para eliminar ,elimina el servcio para elimar el repuesto " + ex.Message;
             }
         }
-        public respuestos Consultar(string Nombre)
+        public respuestos Consultar(int Codigo)
         {
             
             //Las expresiones lambda, son "variables" que se convierten en una instancia del objeto que se está "trabajando"
             //Se escribe la "variable" seguido de la instrución "=>"
-            return Repuesto.respuestos.FirstOrDefault(R=>R.Nombre_repuesto==Nombre);
+            return Repuesto.respuestos.FirstOrDefault(R=>R.Codigo==Codigo);
         }
     }
 }

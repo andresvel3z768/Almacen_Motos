@@ -9,6 +9,7 @@
 
 namespace Almacen_Motos.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,9 +20,8 @@ namespace Almacen_Motos.Models
         public string descripcion { get; set; }
         public Nullable<double> precio { get; set; }
         public Nullable<int> codigo_repuesto { get; set; }
-        public Nullable<int> C_Garantia { get; set; }
-    
-        public virtual garantia garantia { get; set; }
+
+        [JsonIgnore]
         public virtual respuestos respuestos { get; set; }
     }
 }

@@ -13,6 +13,10 @@ namespace Almacen_Motos.Clases
 
         public servicio_mecanica servicio_ { get; set; }
 
+        public servicio_mecanica consultar(int codigo)
+        {
+            return Servicio.servicio_mecanica.FirstOrDefault(S => S.Codigo_servicio == codigo);
+        }
         public string insertar()
         {
             try
@@ -52,9 +56,6 @@ namespace Almacen_Motos.Clases
             catch (Exception ex) { return "no se puede eliminar el servicio sin eliminar su dependientes "+ex.Message; }
         }
 
-        public servicio_mecanica consultar(int codigo) 
-        { 
-            return Servicio.servicio_mecanica.FirstOrDefault(C=> C.Codigo_servicio == codigo);
-        }
+        
     }
 }
